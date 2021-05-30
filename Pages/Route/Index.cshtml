@@ -1,0 +1,123 @@
+﻿@page
+@model BDTransportCompany.Pages.Route.IndexModel
+
+@{
+    ViewData["Title"] = "Таблица";
+}
+
+<h1>Таблица</h1>
+
+<p>
+    <a asp-page="Create">Добавить</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].CarID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].WhereFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].Where)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].DateOfDeparture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].DateOfArrival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].Cargo_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].RecordOfThePayment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].TheMarkOnTheReturn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes[0].Staff_ID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Routes) {
+        <tr>
+            <td>
+                @{
+                    try
+                    {
+                        @Model.Cars.First(r => r.ID == item.CarID).CarBrand_ID
+                    }
+                    catch
+                    {
+                        <p> Данных нет </p>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WhereFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Where)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfDeparture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfArrival)
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @Model.Cargos.First(r => r.ID == item.CargoID).Title
+                    }
+                    catch
+                    {
+                        <p> Данных нет </p>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordOfThePayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheMarkOnTheReturn)
+            </td>
+            <td>
+                @{
+                    try
+                    {
+                        @Model.Staff.First(r => r.ID == item.StaffID).FullName
+                    }
+                    catch
+                    {
+                        <p> Данных нет </p>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Подробнее</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
